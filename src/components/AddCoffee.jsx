@@ -1,10 +1,10 @@
 // import React from 'react';
 import Swal from 'sweetalert2'
 const AddCoffee = () => {
-    const handleAddCoffee = event =>{
+    const handleAddCoffee = event => {
         event.preventDefault();
 
-        const form =event.target;
+        const form = event.target;
 
         const name = form.name.value;
         const quantity = form.quantity.value;
@@ -13,29 +13,29 @@ const AddCoffee = () => {
         const category = form.category.value;
         const details = form.details.value;
         const photo = form.photo.value;
-        
-        const newCoffee = {name, quantity,supplier,taste,category,details,photo}
+
+        const newCoffee = { name, quantity, supplier, taste, category, details, photo }
         console.log(newCoffee);
 
-        fetch('http://localhost:5000/coffee' ,{
+        fetch('http://localhost:5000/coffee', {
             method: 'POST',
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(newCoffee)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.insetedId){
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'New Coffee added successfully! ',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                  })
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insetedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'New Coffee added successfully! ',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    });
+                }
+            })
     }
     return (
         <div className="bg-[#F4F3F0] p-24">
