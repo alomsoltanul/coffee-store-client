@@ -1,10 +1,11 @@
 // import React from 'react';
 
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee }) => {
 
-    const { name, quantity, supplier, taste, category, details, photo } = coffee;
+    const { _id, name, quantity, supplier, taste, category, details, photo } = coffee;
 
     const handleDelete = _id => {
         console.log(_id);
@@ -19,18 +20,18 @@ const CoffeeCard = ({ coffee }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/coffee/${_id}` , {
-                    method:'DELETE'
+                fetch(`http://localhost:5000/coffee/${_id}`, {
+                    method: 'DELETE'
                 })
                     .then(res => res.json())
                     .then(data => {
                         console.log(data);
                         if (data.deletedCount > 0) {
-                              Swal.fire({
+                            Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
                                 icon: "success"
-                              });
+                            });
                         }
                     })
             }
@@ -65,7 +66,10 @@ const CoffeeCard = ({ coffee }) => {
                         <div className="btn-group  space-y-4 grid grid-row-3   ">
                             {/* grid grid-row-3 */}
                             <button className="btn bg-yellow-500 text-white">View</button>
-                            <button className="btn bg-green-800  text-white">Edit</button>
+                            <Link to={`updateCoffee/${_id}`}>
+                                <button className="btn bg-green-800  text-white">Edit</button>
+                            </Link>
+
                             <button onClick={() => handleDelete(_id)} className="btn bg-red-800  text-white">X</button>
                         </div>
 
